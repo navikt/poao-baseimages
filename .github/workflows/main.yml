@@ -1,7 +1,7 @@
 name: Build and push base images
 on: push
 env:
-  IMAGE_JAVA: ghcr.io/${{ github.repository }}/poao-baseimages/java
+  IMAGE_JAVA: ghcr.io/${{ github.repository }}/java
 
 jobs:
   build-and-push-java:
