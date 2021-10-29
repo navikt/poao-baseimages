@@ -1,0 +1,23 @@
+name: Build and push base images
+on: push
+env:
+  IMAGE_JAVA: ghcr.io/${{ github.repository }}/poao-baseimages/java
+
+jobs:
+  build-and-push-java:
+    name: Build and push java base images
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Build and push base images
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
+          docker build -t ${IMAGE_JAVA}:11 --build-arg java_version=11 java
+          docker build -t ${IMAGE_JAVA}:15 --build-arg java_version=15 java
+          docker push ${IMAGE_JAVA}:11
+          docker push ${IMAGE_JAVA}:15
