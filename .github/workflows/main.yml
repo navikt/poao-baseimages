@@ -1,5 +1,12 @@
 name: Build and push base images
-on: push
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    # For å få med oss nye versjoner av navikt/java så bygger vi ukentlig ny versjon (hvis det ikke har skjedd endringer så blir dette en NO-OP for konsumenter av imaget)
+    - cron: '0 12 * * 3' # Kjør onsdag kl 12:00 hver uke
+
 env:
   IMAGE_JAVA: ghcr.io/${{ github.repository }}/java
 
@@ -7,7 +14,6 @@ jobs:
   build-and-push-java:
     name: Build and push java base images
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
       - name: Checkout
         uses: actions/checkout@v1
