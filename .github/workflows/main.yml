@@ -25,5 +25,7 @@ jobs:
           echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
           docker build -t ${IMAGE_JAVA}:11 --build-arg java_version=11 java
           docker build -t ${IMAGE_JAVA}:15 --build-arg java_version=15 java
+          docker build -t ${IMAGE_JAVA}:17 --build-arg java_version=17 java
           docker push ${IMAGE_JAVA}:11
           docker push ${IMAGE_JAVA}:15
+          docker push ${IMAGE_JAVA}:17

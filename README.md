@@ -13,7 +13,7 @@ docker build -t poao-baseimages-java11 --build-arg java_version=11 ./java
 
 ### Java
 ```dockerfile
-FROM ghcr.io/navikt/poao-baseimages/java:11
+FROM ghcr.io/navikt/poao-baseimages/java:<11|15|17>
 COPY <path-to-jar> app.jar
 ```
 
