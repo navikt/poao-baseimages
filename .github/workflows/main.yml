@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build and push base images
         env:
@@ -26,5 +26,7 @@ jobs:
           echo ${GITHUB_TOKEN} | docker login ghcr.io -u ${GITHUB_REPOSITORY} --password-stdin
           docker build -t ${IMAGE_JAVA}:11 --build-arg java_version=11 java
           docker build -t ${IMAGE_JAVA}:17 --build-arg java_version=17 java
+          docker build -t ${IMAGE_JAVA}:21 --build-arg java_version=21 java
           docker push ${IMAGE_JAVA}:11
           docker push ${IMAGE_JAVA}:17
+          docker push ${IMAGE_JAVA}:21
